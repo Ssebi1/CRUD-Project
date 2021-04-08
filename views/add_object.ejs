@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add object</title>
+    <link rel="stylesheet" href="./add_object.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="title">Add object</h1>
+        <form action="/add/submit">
+            <label>Name <span class="mandatory">*</span></label><br>
+            <input type="text" name="object_name" required><br>
+            <label>Price <span class="mandatory">*</span></label><br>
+            <input type="number" name="object_price" required><br>
+            <label>Quantity</label><br>
+            <input type="number" name="object_quantity"><br>
+            <label>Description</label><br>
+            <input type="text" name="object_description"><br>
+            <label>Comments</label><br>
+            <input type="comments" name="object_comments"><br>
+            <label>Rating</label>
+            <select name="object_rating">
+                <option value="none"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br>
+            <button type="submit" name="object_submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

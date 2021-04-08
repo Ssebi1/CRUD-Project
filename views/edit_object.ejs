@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit object</title>
+    <link rel="stylesheet" href="./edit_object.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1 class="title">Edit object</h1>
+        <form action="/edit/submit">
+            <label>Name <span class="mandatory">*</span></label><br>
+            <input type="text" name="object_name" value="<%=data.name%>" required><br>
+            <label>Price <span class="mandatory">*</span required></label><br>
+            <input type="number" name="object_price"  value="<%=data.price%>"><br>
+            <label>Quantity</label><br>
+            <input type="number" name="object_quantity" value="<%=data.quantity%>"><br>
+            <label>Description</label><br>
+            <input type="text" name="object_description" value="<%=data.description%>"><br>
+            <label>Comments</label><br>
+            <input type="comments" name="object_comments"  value="<%=data.comments%>"><br>
+            <label>Rating</label>
+            <select name="object_rating">
+                <option value="none" selected="selected"></option>
+                <% for(let i=1;i<=5;i++){ %>
+                    <% if(i==data.rating){ %>
+                        <option value="<%=i%>" selected="selected"><%=i%></option>
+                    <% } else{ %>
+                        <option value="<%=i%>"><%=i%></option>
+                <% }} %>
+                        
+            </select><br>
+            <button type="submit" name="object_submit">Submit</button>
+            <input type="hidden" name="id" style="display: none;" value="<%=data._id%>">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+body{
+    margin:0;
+    padding: 0;
+    font-family: roboto;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(./fonts/Roboto-Regular.ttf);
+}
+
+.main-container{
+    width:98%;
+    max-width:1400px;
+    height:auto;
+    margin:0 auto;
+}
+
+.title{
+    text-align: center;
+}
+
+.objects-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.object{
+    position: relative;
+    width:300px;
+    height:auto;
+    background-color: #e6e6e6;
+    border-radius:5px;
+    padding:25px;
+    margin:0 auto;
+    margin:10px;
+}
+
+.action-buttons ul a{
+    color:black;
+}
+
+.object-data{
+    padding-inline-start: 0;
+    margin-top:50px;
+}
+
+.object-data li{
+    list-style-type: none;
+    margin-bottom:10px;
+    font-size:18px; 
+}
+
+.object-data li:first-child{
+    font-weight: bold;
+}
+
+.action-buttons ul li{
+    display: inline-block;
+    list-style-type: none;
+    font-size: 20px;
+    padding-right:5px;
+    cursor: pointer;
+}
+
+.action-buttons ul{
+    position: absolute;
+    right:15px;
+    top:0;
+}
+
+.add-button{
+    font-size:26px;
+    color:white;
+    font-weight: bold;
+    background-color: greenyellow;
+    border-radius:50%;
+    padding:5px;
+    width:30px;
+    height: 30px;
+    text-align: center;
+    position: fixed;
+    right:50px;
+    bottom:50px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.add-button:hover{
+    background-color: #7ecf05;
+}

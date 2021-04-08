@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/index.css">
+    <script src="https://kit.fontawesome.com/b42cb1ab32.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1 class="title">Dashboard</h1>
+        <form action="/search">
+            <input type="text" name="keyword" value="<%=search%>">
+            <button>Search</button>
+        </form>
+        <select name="sort-criteria" id="sort-criteria">
+            <option value="oldest" autofocus>Oldest</option>
+            <% if(sort == 'name-ascending'){ %>
+            <option value="name-ascending" selected="selected">Name Ascending</option>
+            <%} else { %>
+            <option value="name-ascending">Name Ascending</option>
+            <%}%>
+
+            <% if(sort == 'name-descending'){ %>
+            <option value="name-descending" selected="selected">Name Descending</option>
+            <%} else { %>
+            <option value="name-descending">Name Descending</option>
+            <%}%>
+
+            <% if(sort == 'price-ascending'){ %>
+            <option value="price-ascending" selected="selected">Price Ascending</option>
+            <%} else { %>
+            <option value="price-ascending">Price Ascending</option>
+            <%}%>
+
+            <% if(sort == 'price-descending'){ %>
+            <option value="price-descending" selected="selected">Price Descending</option>
+            <%} else { %>
+            <option value="price-descending">Price Descending</option>
+            <%}%>
+
+        </select>
+        <div class="objects-container">
+
+            <% data.forEach(el => { %>
+                <div class="object"data-id="<%= el._id%>">
+                    <div class="action-buttons">
+                        <ul>
+                            <li><i class="far fa-square"></i></li>
+                            <a href="/edit?id=<%= el._id%>"><li><i class="fas fa-pencil-alt"></i></li></a>
+                            <a href="/delete?id=<%= el._id%>"><li class="object-delete"><i class="fas fa-trash"></i></li></a>
+                        </ul>
+                    </div>
+                    <ul class="object-data">
+                        <li>Name: <%=el.name%></li>
+                        <li>Price: <%=el.price%></li>
+                        <li>Quantity: <%=el.quantity%></li>
+                        <li>Description: <%=el.description%></li>
+                        <li>Comments: <%=el.comments%></li>
+                        <li>Rating: <%=el.rating%></li>
+                    </ul>
+                </div>
+            <% }) %>
+
+
+        </div>
+    </div>
+
+    <a class="add-button" href="/add">+</a>
+
+<script>
+    document.addEventListener('input', function (event) {
+        if(event.target.id!="sort-criteria")
+            return;
+
+        window.location.replace('/dashboard?search=<%=search%>&sort='+event.target.value);
+    }, false);
+</script>
+</body>
+</html>
