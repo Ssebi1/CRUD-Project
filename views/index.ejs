@@ -44,7 +44,7 @@
 
         </select>
         <div class="objects-container">
-            <% if(data.length==0){ %>
+            <% if(data.length==0 && search!=undefined){ %>
                 <h3>No results for <%=search%></h3>
             <% }else{ %>
             <% data.forEach(el => { %>
