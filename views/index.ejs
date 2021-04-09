@@ -12,11 +12,11 @@
 
     <div class="main-container">
         <h1 class="title">Dashboard</h1>
-        <form action="/search">
+        <form action="/search" class="search">
             <input type="text" name="keyword" value="<%=search%>">
             <button>Search</button>
         </form>
-        <select name="sort-criteria" id="sort-criteria">
+        <select name="sort-criteria" id="sort-criteria" class="sort-criteria">
             <option value="oldest" autofocus>Oldest</option>
             <% if(sort == 'name-ascending'){ %>
             <option value="name-ascending" selected="selected">Name Ascending</option>
@@ -44,12 +44,14 @@
 
         </select>
         <div class="objects-container">
-
+            <% if(data.length==0){ %>
+                <h3>No results for <%=search%></h3>
+            <% }else{ %>
             <% data.forEach(el => { %>
                 <div class="object"data-id="<%= el._id%>">
                     <div class="action-buttons">
                         <ul>
-                            <li><i class="far fa-square"></i></li>
+                            <li data-id="<%= el._id%>" class="object-select"><i class="far fa-square"></i></li>
                             <a href="/edit?id=<%= el._id%>"><li><i class="fas fa-pencil-alt"></i></li></a>
                             <a href="/delete?id=<%= el._id%>"><li class="object-delete"><i class="fas fa-trash"></i></li></a>
                         </ul>
@@ -63,21 +65,72 @@
                         <li>Rating: <%=el.rating%></li>
                     </ul>
                 </div>
-            <% }) %>
+            <% })} %>
 
 
         </div>
     </div>
 
     <a class="add-button" href="/add">+</a>
+    <a class="delete-button" style="display: none;"><i class="fas fa-trash"></i></a>
 
 <script>
+    
+    objectSelects = document.querySelectorAll('.object-select');
+    let idList = []
+    let count = 0;
+    for(let i=0;i<objectSelects.length;i++)
+    {
+        idList[i] = 0;
+    }
+
+    for(let i=0;i<objectSelects.length;i++)
+    {
+        objectSelects[i].addEventListener('click',()=>{
+            if(idList[i]==0)
+                {
+                    idList[i] = objectSelects[i].dataset.id;
+                    objectSelects[i].innerHTML = '<i class="fas fa-square"></i>';
+                    count += 1;
+                    document.querySelector('.delete-button').style.display="inherit";
+                }
+            else
+                {
+                    idList[i] = 0;
+                    objectSelects[i].innerHTML = '<i class="far fa-square"></i>';
+                    count -= 1;
+                    if(count==0)
+                        document.querySelector('.delete-button').style.display="none";
+
+                }
+        });
+    }
+
+    
+    document.querySelector('.delete-button').addEventListener('click',()=>{
+        objectsToDelete = '';
+        for(let i=0;i<objectSelects.length;i++)
+        {
+            if(idList[i]!=0)
+                {
+                    objectsToDelete += idList[i]; 
+                    objectsToDelete += '|'; 
+                }
+        }
+        objectsToDelete = objectsToDelete.slice(0, -1)
+        
+        console.log(objectsToDelete);
+        window.location.replace('/delete?id='+objectsToDelete);
+    });
+    
+
     document.addEventListener('input', function (event) {
         if(event.target.id!="sort-criteria")
             return;
 
         window.location.replace('/dashboard?search=<%=search%>&sort='+event.target.value);
     }, false);
+    
 </script>
 </body>
 </html>

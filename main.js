@@ -75,7 +75,11 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
     // Delete object
     app.get('/delete',(req,res)=>{
-        objects.deleteOne({_id: ObjectID(req.query.id)})
+        objectsToDelete = req.query.id.split('|');
+        for(let i=0 ;i<objectsToDelete.length;i++)
+            objectsToDelete[i] = ObjectID(objectsToDelete[i]);
+
+        objects.deleteMany({_id: { $in: objectsToDelete}})
             .then(result => {
                 res.redirect('/');
             })

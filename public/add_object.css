@@ -17,11 +17,18 @@ body{
     padding:20px;
     font-size: 20px;
     margin:0 auto;
-    margin-top:30px;
+    margin-top:60px;
 }
 
 .title{
     text-align: center;
+}
+
+.back-button{
+    position: absolute;
+    transform: translate(-20px,-40px);
+    font-size: 15px;
+    color:black;
 }
 
 .form-container input{
